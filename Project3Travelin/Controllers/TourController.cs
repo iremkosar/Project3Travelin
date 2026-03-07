@@ -1,16 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project3Travelin.Dtos.TourDtos;
+using Project3Travelin.Services.CommentServices;
 using Project3Travelin.Services.TourServices;
+using Project3Travelin.ViewModels;
 
 namespace Project3Travelin.Controllers
 {
     public class TourController : Controller
     {
         private readonly ITourService _tourService;
+        private readonly ICommentService _commentService;
 
-        public TourController(ITourService tourService)
+        public TourController(ITourService tourService, ICommentService commentService)
         {
             _tourService = tourService;
+            _commentService = commentService;
         }
 
         public IActionResult CreateTour()
@@ -28,6 +32,19 @@ namespace Project3Travelin.Controllers
         {
             var values = await _tourService.GetAllTourAsync();
             return View(values);
+        }
+        public async Task<IActionResult> TourDetail(string id)
+        {
+            var tour = await _tourService.GetTourByIdAsync(id);
+            var comments = await _commentService.GetCommentsByTourId(id);
+
+            var viewModel = new TourDetailViewModel
+            {
+                Tour = tour,
+                Comments = comments
+            };
+
+            return View(viewModel);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Project3Travelin.Dtos.BookingDtos;
 using Project3Travelin.Dtos.CategoryDtos;
 using Project3Travelin.Dtos.CommentDtos;
 using Project3Travelin.Dtos.TourDtos;
@@ -25,6 +26,9 @@ namespace Project3Travelin.Mapping
             CreateMap<Comment, UpdateCommentDto>().ReverseMap();
             CreateMap<Comment, GetCommentByIdDto>().ReverseMap();
             CreateMap<Comment, ResultCommentListByTourIdDto>().ReverseMap();
+
+            CreateMap<CreateBookingDto, Booking>().ReverseMap();
+            CreateMap<Booking, ResultBookingDto>().ReverseMap();
 
 
         }

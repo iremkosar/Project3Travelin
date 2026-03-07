@@ -403,6 +403,16 @@
             }
         }
 
+        .btn-customers {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+            .btn-customers:hover {
+                background: #dbeafe;
+                color: #1d4ed8;
+            }
+
         @@media (max-width: 575px) {
             .page-header {
                 flex-direction: column;
@@ -545,7 +555,7 @@
                                 <span class="loc-badge"><i class="bi bi-geo-alt"></i>@item.City</span>
                             </td>
                             <td data-label="Tarih">
-                                <span class="date-cell"><i class="bi bi-calendar3 me-1 text-muted"></i>@item.TourDate.ToString("dd.MM.yyyy")</span>
+                                <span class="date-cell"><i class="bi bi-calendar3 me-1 text-muted"></i>@item.StartDate.ToString("dd.MM.yyyy")</span>
                             </td>
                             <td data-label="Süre">
                                 <span class="duration-pill"><i class="bi bi-clock me-1"></i>@item.DayNight</span>
@@ -577,6 +587,10 @@
                                        title="Detay">
                                         <i class="bi bi-eye"></i>
                                     </a>
+                                    <a asp-controller="AdminTour" asp-action="TourCustomers" asp-route-id="@item.TourId"
+                                       class="btn-action btn-customers" title="Kayıtlı Müşteriler">
+                                        <i class="bi bi-people-fill"></i>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
@@ -604,6 +618,8 @@
         </div>
     }
 </div>
+
+
 
 <!-- DELETE MODAL -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">

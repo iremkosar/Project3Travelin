@@ -23,7 +23,8 @@ namespace Project3Travelin.Controllers
             createCommentDto.CommentDate = DateTime.Now;
             createCommentDto.IsStatus = false;
             await _commentService.CreateCommentAsync(createCommentDto);
-            return RedirectToAction("CommentList");
+            //return RedirectToAction("CommentList");
+            return RedirectToAction("TourDetail", "Tour", new { id = createCommentDto.TourId });
         }
         public async Task<IActionResult> CommentListByTourId(string id)
         {

@@ -1,0 +1,74 @@
+﻿@model List<Project3Travelin.Dtos.CommentDtos.ResultCommentListByTourIdDto>
+
+<div id="single-comments" class="single-comments single-box mb-4">
+    <h5 class="border-b pb-2 mb-2">@Model.Count Yorum</h5>
+
+    @if (!Model.Any())
+    {
+        <p class="text-muted">Bu tura henüz yorum yapılmamış.</p>
+    }
+    else
+    {
+        @foreach (var comment in Model.OrderByDescending(x => x.CommentDate))
+        {
+            <div class="comment-box">
+                <div class="comment-image">
+                    <img src="@(string.IsNullOrEmpty(comment.ImageUrl) ? "/images/user-default.png" : comment.ImageUrl)"
+                         class="rounded-circle"
+                         style="width:48px;height:48px;object-fit:cover;"
+                         alt="user" />
+                </div>
+
+                <div class="comment-content rounded">
+                    <div class="comment-meta d-flex align-items-center justify-content-between flex-wrap">
+                        <strong class="me-2">@(string.IsNullOrEmpty(comment.NameSurname) ? "Misafir" : comment.NameSurname)</strong>
+
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="comment-date m-0 p-0" style="display:inline-block;">
+                                @comment.CommentDate.ToString("dd MMM yyyy")
+                            </span>
+
+                            <div class="comment-stars">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <span class="@(i <= comment.Score ? "filled" : "")">★</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="mb-1 mt-2">@comment.Headline</h5>
+                    <p class="comment mb-0">@comment.CommentDetail</p>
+                </div>
+            </div>
+        }
+    }
+  
+</div>
+<style>
+    #single-comments .comment-meta {
+        row-gap: 6px;
+    }
+
+    #single-comments .comment-date {
+        line-height: 1.2;
+    }
+
+    #single-comments .comment-stars span {
+        display: inline-block;
+    }
+
+    .comment-stars span {
+        font-size: 18px;
+    }
+
+    .comment-stars span {
+        color: #ddd; 
+    }
+
+        .comment-stars span.filled {
+            color: #ffc107; 
+        }
+</style>
+
+

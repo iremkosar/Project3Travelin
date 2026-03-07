@@ -740,17 +740,17 @@
                         <!-- Tur Tarihi -->
                         <div class="col-md-6">
                             <div class="field-group">
-                                <label asp-for="TourDate" class="field-label">
+                                <label asp-for="StartDate" class="field-label">
                                     <i class="bi bi-calendar-event" style="color:#a0aec0;font-size:.85rem;"></i>
                                     Tur Tarihi <span class="required">*</span>
                                 </label>
                                 <div class="input-with-icon">
                                     <i class="bi bi-calendar3 input-icon"></i>
-                                    <input asp-for="TourDate" type="date" class="form-control" id="tourDateInput"
+                                    <input asp-for="StartDate" type="date" class="form-control" id="tourDateInput"
                                            min="@DateTime.Now.ToString("yyyy-MM-dd")" />
                                 </div>
                                 <div class="field-hint"><i class="bi bi-info-circle me-1"></i>Bugünden önceki tarih seçilemez.</div>
-                                <span asp-validation-for="TourDate" class="text-danger-field"><i class="bi bi-exclamation-circle"></i><span></span></span>
+                                <span asp-validation-for="StartDate" class="text-danger-field"><i class="bi bi-exclamation-circle"></i><span></span></span>
                             </div>
                         </div>
 

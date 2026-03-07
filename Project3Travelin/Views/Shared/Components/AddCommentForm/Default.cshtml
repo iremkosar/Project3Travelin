@@ -1,0 +1,61 @@
+﻿@model Project3Travelin.Dtos.CommentDtos.CreateCommentDto
+
+<div id="single-add-review" class="single-add-review">
+    <h4>Yorum Yaz</h4>
+    <form asp-action="CreateComment" asp-controller="Comment" method="post">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="TourId" />
+        <div class="col-md-12">
+            <div class="form-group mb-2">
+                <input asp-for="NameSurname" placeholder="Ad Soyad" />
+                <span asp-validation-for="NameSurname" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group mb-2">
+                <input asp-for="ImageUrl" placeholder="Fotoğraf URL (opsiyonel)" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group mb-2">
+                    <input asp-for="Headline" placeholder="Başlık" />
+                    <span asp-validation-for="Headline" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group mb-2">
+                    <textarea asp-for="CommentDetail" placeholder="Yorumunuz..."></textarea>
+                    <span asp-validation-for="CommentDetail" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Yıldız Puanı -->
+            <div class="col-md-12 mb-2">
+                <div class="star-rating">
+                    @for (int i = 5; i >= 1; i--)
+                    {
+                        <input type="radio" id="star-@i" name="Score" value="@i" />
+                        <label for="star-@i" title="@i yıldız">★</label>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-btn">
+                    <button type="submit" class="nir-btn">Yorum Gönder</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<style>
+#single-add-review .rating svg {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+</style >

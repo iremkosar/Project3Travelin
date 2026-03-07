@@ -1,4 +1,6 @@
-﻿namespace Project3Travelin.Dtos.TourDtos
+﻿using Project3Travelin.Entities;
+
+namespace Project3Travelin.Dtos.TourDtos
 {
     public class GetTourByIdDto
     {
@@ -8,8 +10,13 @@
         public string City { get; set; }
         public string Description { get; set; }
         public int Capacity { get; set; }
-        public DateTime TourDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public string DayNight { get; set; }
         public string ImageUrl { get; set; }
+        public string SecondImageUrl { get; set; }
+        public string? VideoUrl { get; set; }
+        public decimal Price { get; set; }
+        public List<TourStop> Stops { get; set; }
     }
 }

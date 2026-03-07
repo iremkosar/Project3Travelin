@@ -4,7 +4,7 @@
             <div class="links">
                 <ul>
                     <li><a href="#" class="white"><i class="icon-calendar white"></i> @DateTime.Now.Year</a></li>
-                    <li><a href="#" class="white"><i class="icon-location-pin white"></i>  İstanbul, Türkiye</a></li>
+                    <li><a href="#" class="white"><i class="icon-location-pin white"></i> İstanbul, Türkiye</a></li>
                     <li><a href="#" class="white"><i class="icon-clock white"></i> Pzrt-Cts: 08.30-18.00</a></li>
                 </ul>
             </div>
@@ -13,51 +13,42 @@
                     <li><a href="#" class="white"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                     <li><a href="#" class="white"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
                     <li><a href="#" class="white"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="white"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+                    <li><a href="#" class="white"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <!-- Navigation Bar -->
     <div class="header_menu" id="header_menu">
         <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-flex d-flex align-items-center justify-content-between w-100 pb-3 pt-3">
-                    <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <a class="navbar-brand" href="index.html">
                             <img src="/travelin/images/logo.png" alt="image">
                         </a>
                     </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="navbar-collapse1 d-flex align-items-center" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav" id="responsive-menu">
-
-                            <li><a href="about.html">Ana Sayfa</a></li>
-                            <li><a href="about.html">Tur Listesi</a></li>
-                            <li><a href="about.html">Tur Rotaları</a></li>
-                            <li><a href="about.html">Vizesiz Turlar</a></li>
-                            <li><a href="about.html">Yurt İçi Turları</a></li>
-
-
+                            <li><a href="about.html" data-i18n="home">Ana Sayfa</a></li>
+                            <li><a href="about.html" data-i18n="tourList">Tur Listesi</a></li>
+                            <li><a href="about.html" data-i18n="tourRoutes">Tur Rotaları</a></li>
+                            <li><a href="about.html" data-i18n="visaFree">Vizesiz Turlar</a></li>
+                            <li><a href="about.html" data-i18n="domestic">Yurt İçi Turları</a></li>
                             <li class="search-main"><a href="#search1" class="mt_search"><i class="fa fa-search"></i></a></li>
                         </ul>
-                    </div><!-- /.navbar-collapse -->
+                    </div>
                     <div class="register-login d-flex align-items-center">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="me-3">
-                            <i class="icon-user"></i> Giriş Yap / Kayıt Ol
+                            <i class="icon-user"></i> <span data-i18n="login">Giriş Yap / Kayıt Ol</span>
                         </a>
-                        <a href="booking.html" class="nir-btn white">Rezervasyon Yap</a>
+                        <a href="booking.html" class="nir-btn white" data-i18n="bookNow">Rezervasyon Yap</a>
                     </div>
-
                     <div id="slicknav-mobile"></div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
         </nav>
     </div>
-    <!-- Navigation Bar Ends -->
 </header>
-
 
 <!-- BreadCrumb Starts -->
 <section class="breadcrumb-main pb-20 pt-14" style="background-image: url(images/bg/bg1.jpg);">
@@ -65,11 +56,11 @@
     <div class="breadcrumb-outer">
         <div class="container">
             <div class="breadcrumb-content text-center">
-                <h1 class="mb-3">Tur Listesi</h1>
+                <h1 class="mb-3" data-i18n="breadcrumbTitle">Tur Listesi</h1>
                 <nav aria-label="breadcrumb" class="d-block">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Güncel Turlarımız</li>
+                        <li class="breadcrumb-item"><a href="#" data-i18n="breadcrumbHome">Ana Sayfa</a></li>
+                        <li class="breadcrumb-item active" aria-current="page" data-i18n="breadcrumbSub">Güncel Turlarımız</li>
                     </ul>
                 </nav>
             </div>

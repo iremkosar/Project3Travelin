@@ -2,6 +2,8 @@
 {
     public class CreateCommentDto
     {
+        public string NameSurname { get; set; }   
+        public string ImageUrl { get; set; }
         public string Headline { get; set; }
         public string CommentDetail { get; set; }
         public int Score { get; set; }

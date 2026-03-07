@@ -1,0 +1,225 @@
+﻿@model List<Project3Travelin.Dtos.BookingDtos.ResultBookingDto>
+@{
+    ViewData["Title"] = "Kayıtlı Müşteriler";
+    Layout = "~/Views/Shared/_TourLayout.cshtml";
+}
+
+@section Styles {
+    <style>
+        .page-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1a202c;
+        }
+
+        .table-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+        }
+
+        .table-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+            .table-card-header .title {
+                font-weight: 700;
+                font-size: .95rem;
+                color: #1a202c;
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+            }
+
+        .customer-count {
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: .72rem;
+            font-weight: 600;
+            padding: .2rem .6rem;
+            border-radius: 20px;
+        }
+
+        .customers-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .customers-table thead th {
+                background: #f8fafc;
+                font-size: .72rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: .06em;
+                color: #718096;
+                padding: .85rem 1rem;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .customers-table tbody tr {
+                border-bottom: 1px solid #f0f4f8;
+                transition: background .12s;
+            }
+
+                .customers-table tbody tr:hover {
+                    background: #f8fafc;
+                }
+
+            .customers-table tbody td {
+                padding: .85rem 1rem;
+                vertical-align: middle;
+                font-size: .875rem;
+                color: #2d3748;
+            }
+
+        .empty-state {
+            padding: 4rem 2rem;
+            text-align: center;
+            color: #a0aec0;
+        }
+
+            .empty-state i {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                display: block;
+            }
+    </style>
+}
+
+<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+    <div>
+        <h1 class="page-title">@ViewBag.TourTitle – Müşteriler</h1>
+        <nav aria-label="breadcrumb" class="mt-2">
+            <ol class="breadcrumb" style="margin:0;padding:0;background:none;">
+                <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                <li class="breadcrumb-item"><a asp-controller="AdminTour" asp-action="TourList">Turlar</a></li>
+                <li class="breadcrumb-item active">Müşteriler</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="table-card">
+    <div class="table-card-header">
+        <div class="title">
+            <i class="bi bi-people" style="color:#a0aec0;"></i>
+            Onaylanan Müşteriler
+            <span class="customer-count">@(Model?.Count ?? 0) kişi</span>
+        </div>
+        <div style="display:flex;gap:.5rem;">
+            <button onclick="downloadPdf()" class="btn btn-sm"
+                    style="background:#e53e3e;color:white;border-radius:8px;padding:.4rem .9rem;">
+                <i class="bi bi-file-earmark-pdf-fill"></i> PDF İndir
+            </button>
+            <a asp-controller="AdminTour" asp-action="TourList"
+               class="btn btn-sm btn-outline-secondary" style="border-radius:8px;">
+                ← Tur Listesine Dön
+            </a>
+        </div>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="empty-state">
+            <i class="bi bi-person-x"></i>
+            <p>Bu tura onaylanan müşteri bulunmuyor.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="customers-table" id="customersTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ad Soyad</th>
+                        <th>E-posta</th>
+                        <th>Kişi Sayısı</th>
+                        <th>Toplam Fiyat</th>
+                        <th>Rezervasyon Tarihi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int i = 1;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr data-no="@i"
+                            data-name="@item.FirstName @item.LastName"
+                            data-email="@item.Email"
+                            data-person="@item.PersonCount"
+                            data-price="@item.TotalPrice.ToString("N2") TL"
+                            data-date="@item.BookingDate.ToString("dd.MM.yyyy")">
+                            <td>@i</td>
+                            <td><strong>@item.FirstName @item.LastName</strong></td>
+                            <td>@item.Email</td>
+                            <td>@item.PersonCount</td>
+                            <td><strong>@item.TotalPrice.ToString("N2") TL</strong></td>
+                            <td>@item.BookingDate.ToString("dd.MM.yyyy")</td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        function fixTurkish(text) {
+            if (!text) return '';
+            return text
+                .replace(/\u011f/g, 'g').replace(/\u011e/g, 'G')
+                .replace(/\u015f/g, 's').replace(/\u015e/g, 'S')
+                .replace(/\u0131/g, 'i').replace(/\u0130/g, 'I')
+                .replace(/\u00fc/g, 'u').replace(/\u00dc/g, 'U')
+                .replace(/\u00f6/g, 'o').replace(/\u00d6/g, 'O')
+                .replace(/\u00e7/g, 'c').replace(/\u00c7/g, 'C');
+        }
+
+        function downloadPdf() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const tourTitle = fixTurkish("@Html.Raw(ViewBag.TourTitle)");
+
+            doc.setFontSize(14);
+            doc.text(tourTitle + " - Kayitli Musteriler", 14, 15);
+            doc.setFontSize(9);
+            doc.text("Tarih: " + new Date().toLocaleDateString('tr-TR'), 14, 22);
+
+            // Veriyi HTML tablosundan oku
+            const rows = document.querySelectorAll('#customersTable tbody tr');
+            const body = Array.from(rows).map(row => [
+                fixTurkish(row.dataset.no),
+                fixTurkish(row.dataset.name),
+                fixTurkish(row.dataset.email),
+                fixTurkish(row.dataset.person),
+                fixTurkish(row.dataset.price),
+                fixTurkish(row.dataset.date)
+            ]);
+
+            doc.autoTable({
+                startY: 28,
+                head: [['#', 'Ad Soyad', 'E-posta', 'Kisi Sayisi', 'Toplam Fiyat', 'Rezervasyon Tarihi']],
+                body: body,
+                headStyles: { fillColor: [10, 171, 151] },
+                alternateRowStyles: { fillColor: [232, 245, 243] },
+            });
+
+            doc.save(tourTitle + '_musteriler.pdf');
+        }
+    </script>
+}
