@@ -1,0 +1,413 @@
+﻿@model List<Project3Travelin.Dtos.CommentDtos.ResultCommentDto>
+
+@{
+    ViewData["Title"] = "Yorum Yönetimi";
+    Layout = "~/Views/Shared/_TourLayout.cshtml";
+}
+
+@section Styles {
+    <style>
+        .page-title {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1a202c;
+            letter-spacing: -.03em;
+            line-height: 1;
+        }
+
+        .breadcrumb {
+            margin: 0;
+            padding: 0;
+            background: none;
+        }
+
+        .breadcrumb-item {
+            font-size: .8rem;
+        }
+
+            .breadcrumb-item a {
+                color: #2563eb;
+                text-decoration: none;
+            }
+
+            .breadcrumb-item.active {
+                color: #718096;
+            }
+
+        .table-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,.06);
+        }
+
+        .table-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+            .table-card-header .title {
+                font-weight: 700;
+                font-size: .95rem;
+                color: #1a202c;
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+            }
+
+        .comment-count {
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: .72rem;
+            font-weight: 600;
+            padding: .2rem .6rem;
+            border-radius: 20px;
+        }
+
+        .search-input {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: .45rem .9rem;
+            font-size: .85rem;
+            outline: none;
+            width: 220px;
+            transition: border-color .15s;
+        }
+
+            .search-input:focus {
+                border-color: #2563eb;
+            }
+
+        .comments-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .comments-table thead th {
+                background: #f8fafc;
+                font-size: .72rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: .06em;
+                color: #718096;
+                padding: .85rem 1rem;
+                border-bottom: 1px solid #e2e8f0;
+                white-space: nowrap;
+            }
+
+            .comments-table tbody tr {
+                transition: background .12s;
+                border-bottom: 1px solid #f0f4f8;
+            }
+
+                .comments-table tbody tr:last-child {
+                    border-bottom: none;
+                }
+
+                .comments-table tbody tr:hover {
+                    background: #f8fafc;
+                }
+
+            .comments-table tbody td {
+                padding: .85rem 1rem;
+                vertical-align: middle;
+                font-size: .875rem;
+                color: #2d3748;
+            }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e2e8f0;
+        }
+
+        .avatar-placeholder {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2563eb, #1a202c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: #1a202c;
+            font-size: .875rem;
+        }
+
+        .tour-id {
+            font-size: .72rem;
+            color: #a0aec0;
+            font-family: monospace;
+        }
+
+        .headline {
+            font-weight: 600;
+            color: #1a202c;
+            font-size: .875rem;
+        }
+
+        .detail-txt {
+            font-size: .8rem;
+            color: #718096;
+            max-width: 280px;
+        }
+
+        .star-display {
+            display: inline-flex;
+            gap: 2px;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+            .star-display .filled {
+                color: #f59e0b;
+            }
+
+            .star-display .empty {
+                color: #d1d5db;
+            }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            font-size: .75rem;
+            font-weight: 600;
+            padding: .3rem .75rem;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .badge-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-draft {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .action-group {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+        }
+
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            border: none;
+            cursor: pointer;
+            font-size: .85rem;
+            transition: all .15s;
+            text-decoration: none;
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+            .btn-delete:hover {
+                background: #fecaca;
+                color: #7f1d1d;
+            }
+
+        .btn-publish {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+            .btn-publish:hover {
+                background: #a7f3d0;
+                color: #064e3b;
+            }
+
+        .btn-unpublish {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+            .btn-unpublish:hover {
+                background: #fde68a;
+                color: #78350f;
+            }
+
+        .date-cell {
+            font-size: .8rem;
+            white-space: nowrap;
+        }
+
+        .empty-state {
+            padding: 4rem 2rem;
+            text-align: center;
+            color: #a0aec0;
+        }
+
+            .empty-state i {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                display: block;
+            }
+
+            .empty-state p {
+                font-size: .9rem;
+            }
+    </style>
+}
+
+<div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-4">
+    <div>
+        <h1 class="page-title">Yorum Yönetimi</h1>
+        <nav aria-label="breadcrumb" class="mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Yorumlar</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="table-card">
+    <div class="table-card-header">
+        <div class="title">
+            <i class="bi bi-chat-left-text" style="color:#a0aec0;"></i>
+            Tüm Yorumlar
+            <span class="comment-count">@Model.Count kayıt</span>
+        </div>
+        <input type="text" id="searchInput" class="search-input"
+               placeholder="🔍 İsim veya başlık ara..." />
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <i class="bi bi-chat-slash"></i>
+            <p>Henüz hiç yorum yapılmamış.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="comments-table">
+                <thead>
+                    <tr>
+                        <th>Kullanıcı</th>
+                        <th>Başlık & Yorum</th>
+                        <th>Puan</th>
+                        <th>Tarih</th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody id="commentTableBody">
+                    @foreach (var item in Model.OrderByDescending(x => x.CommentDate))
+                    {
+                        <tr data-search="@item.NameSurname?.ToLower() @item.Headline?.ToLower()">
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                    {
+                                        <img src="@item.ImageUrl" class="avatar" alt="@item.NameSurname" />
+                                    }
+                                    else
+                                    {
+                                        <div class="avatar-placeholder">
+                                            @(string.IsNullOrEmpty(item.NameSurname) ? "?" : item.NameSurname.Substring(0, 1).ToUpper())
+                                        </div>
+                                    }
+                                    <div>
+                                        <div class="user-name">@item.NameSurname</div>
+                                        <div class="tour-id">@item.TourId</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="headline">@item.Headline</div>
+                                <div class="detail-txt">@item.CommentDetail</div>
+                            </td>
+                            <td>
+                                <div class="star-display">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <span class="@(i <= item.Score ? "filled" : "empty")">★</span>
+                                    }
+                                </div>
+                                <div style="font-size:.75rem; color:#718096; margin-top:3px;">@item.Score / 5</div>
+                            </td>
+                            <td>
+                                <div class="date-cell">@item.CommentDate.ToString("dd.MM.yyyy")</div>
+                                <div style="font-size:.72rem; color:#a0aec0;">@item.CommentDate.ToString("HH:mm")</div>
+                            </td>
+                            <td>
+                                @if (item.IsStatus)
+                                {
+                                    <span class="badge-status badge-active">
+                                        <i class="bi bi-check-circle-fill"></i> Yayında
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge-status badge-draft">
+                                        <i class="bi bi-clock"></i> Taslak
+                                    </span>
+                                }
+                            </td>
+                            <td>
+                                <div class="action-group">
+                                    <!-- Yayınla / Taslağa Al -->
+                                    <a asp-controller="AdminComment" asp-action="ToggleStatus"
+                                       asp-route-id="@item.CommentId"
+                                       class="btn-action @(item.IsStatus ? "btn-unpublish" : "btn-publish")"
+                                       title="@(item.IsStatus ? "Taslağa Al" : "Yayınla")">
+                                        <i class="bi @(item.IsStatus ? "bi-eye-slash" : "bi-eye")"></i>
+                                    </a>
+                                    <!-- Sil -->
+                                    <a asp-controller="AdminComment" asp-action="DeleteComment"
+                                       asp-route-id="@item.CommentId"
+                                       class="btn-action btn-delete"
+                                       title="Sil"
+                                       onclick="return confirm('Bu yorumu silmek istediğinize emin misiniz?')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function () {
+            var q = this.value.toLowerCase();
+            document.querySelectorAll('#commentTableBody tr').forEach(function (row) {
+                var text = row.getAttribute('data-search') || '';
+                row.style.display = text.includes(q) ? '' : 'none';
+            });
+        });
+    </script>
+}

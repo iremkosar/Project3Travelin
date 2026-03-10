@@ -11,7 +11,7 @@ namespace Project3Travelin.Services.CommentServices
         private readonly IMapper _mapper;
         private readonly IMongoCollection<Comment> _commentCollection;
 
-        public CommentService(IMapper mapper,IDatabaseSettings _databaseSettings)
+        public CommentService(IMapper mapper, IDatabaseSettings _databaseSettings)
         {
             var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.DatabaseName);
@@ -27,7 +27,7 @@ namespace Project3Travelin.Services.CommentServices
 
         public async Task DeleteCommentAsync(string id)
         {
-            await _commentCollection.DeleteOneAsync(x=>x.CommentId==id);
+            await _commentCollection.DeleteOneAsync(x => x.CommentId == id);
         }
 
         public async Task<List<ResultCommentDto>> GetAllCommentAsync()
@@ -44,14 +44,26 @@ namespace Project3Travelin.Services.CommentServices
 
         public async Task<List<ResultCommentListByTourIdDto>> GetCommentsByTourId(string id)
         {
-            var values = await _commentCollection.Find(x => x.TourId == id).ToListAsync();
+            var values = await _commentCollection
+         .Find(x => x.TourId == id && x.IsStatus == true)
+         .ToListAsync();
             return _mapper.Map<List<ResultCommentListByTourIdDto>>(values);
         }
 
         public async Task UpdateCommentAsync(UpdateCommentDto updateCommentDto)
         {
-           var value=_mapper.Map<Comment>(updateCommentDto);
+            var value = _mapper.Map<Comment>(updateCommentDto);
             await _commentCollection.FindOneAndReplaceAsync(x => x.CommentId == updateCommentDto.CommentId, value);
+        }
+
+        public async Task ToggleStatusAsync(string id)
+        {
+            var comment = await _commentCollection.Find(x => x.CommentId == id).FirstOrDefaultAsync();
+            if (comment != null)
+            {
+                var update = Builders<Comment>.Update.Set(x => x.IsStatus, !comment.IsStatus);
+                await _commentCollection.UpdateOneAsync(x => x.CommentId == id, update);
+            }
         }
     }
 }

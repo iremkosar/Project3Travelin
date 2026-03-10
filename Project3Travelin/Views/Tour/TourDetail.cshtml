@@ -188,6 +188,23 @@
                         </div>
                     }
 
+                    <!-- AI Rota Kartı -->
+                    <div class="bg-white rounded box-shadow p-4 mb-4">
+                        <h4 class="mb-3"><i class="fa fa-map-marked-alt theme me-2"></i> 4 Günlük Gezi Rotası</h4>
+                        <p class="text-muted" style="font-size:14px;">Yapay zeka destekli rota planlayıcı ile <strong>@Model.Tour.Title</strong> için önerilen gezi rotanızı oluşturun.</p>
+
+                        <button onclick="generateRoute()" id="routeBtn" class="nir-btn w-100 mb-3">
+                            <i class="fa fa-magic me-2"></i> Rota Oluştur
+                        </button>
+
+                        <div id="routeLoading" style="display:none; text-align:center; padding:20px;">
+                            <div class="spinner-border text-primary" role="status"></div>
+                            <p class="mt-2 text-muted">Rota oluşturuluyor...</p>
+                        </div>
+
+                        <div id="routeResult" style="display:none;"></div>
+                    </div>
+
                     <!-- YORUMLAR ViewComponent -->
                     @await Component.InvokeAsync("CommentList",
                              new { comments = Model.Comments })
@@ -386,57 +403,58 @@
 <!-- footer starts -->
 <footer class="pt-20 pb-4" style="background-image: url(/travelin/images/background_pattern.png);">
     <div class="section-shape top-0" style="background-image: url(/travelin/images/shape8.png);"></div>
+
     <!-- Instagram starts -->
     <div class="insta-main pb-10">
         <div class="container">
             <div class="insta-inner">
                 <div class="follow-button">
-                    <h5 class="m-0 rounded"><i class="fab fa-instagram"></i> Follow on Instagram</h5>
+                    <h5 class="m-0 rounded"><i class="fab fa-instagram"></i> Instagram'da Takip Edin</h5>
                 </div>
                 <div class="row attract-slider">
                     <div class="col-md-3 col-sm-6">
                         <div class="insta-image rounded">
-                            <a href="gallery.html"><img src="/travelin/images/insta/ins-3.jpg" alt="insta"></a>
+                            <a href="#"><img src="/travelin/images/insta/1.jpg" alt="insta"></a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="insta-image rounded">
-                            <a href="gallery.html"><img src="/travelin/images/insta/ins-4.jpg" alt="insta"></a>
+                            <a href="#"><img src="/travelin/images/insta/2.jpg" alt="insta"></a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="insta-image rounded">
-                            <a href="gallery.html"><img src="/travelin/images/insta/ins-5.jpg" alt="insta"></a>
+                            <a href="#"><img src="/travelin/images/insta/3.jpg" alt="insta"></a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="insta-image rounded">
-                            <a href="gallery.html"><img src="/travelin/images/insta/ins-1.jpg" alt="insta"></a>
+                            <a href="#"><img src="/travelin/images/insta/4.jpg" alt="insta"></a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="insta-image rounded">
-                            <a href="gallery.html"><img src="/travelin/images/insta/ins-7.jpg" alt="insta"></a>
+                            <a href="#"><img src="/travelin/images/insta/5.jpg" alt="insta"></a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="insta-image rounded">
-                            <a href="gallery.html"><img src="/travelin/images/insta/ins-8.jpg" alt="insta"></a>
+                            <a href="#"><img src="/travelin/images/insta/6.jpg" alt="insta"></a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="insta-image rounded">
-                            <a href="gallery.html"><img src="/travelin/images/insta/ins-2.jpg" alt="insta"></a>
+                            <a href="#"><img src="/travelin/images/insta/7.jpg" alt="insta"></a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="insta-image rounded">
-                            <a href="gallery.html"><img src="/travelin/images/insta/ins-6.jpg" alt="insta"></a>
+                            <a href="#"><img src="/travelin/images/insta/8.jpg" alt="insta"></a>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="insta-image rounded">
-                            <a href="gallery.html"><img src="/travelin/images/insta/ins-9.jpg" alt="insta"></a>
+                            <a href="#"><img src="/travelin/images/insta/9.jpg" alt="insta"></a>
                         </div>
                     </div>
                 </div>
@@ -444,6 +462,7 @@
         </div>
     </div>
     <!-- Instagram ends -->
+
     <div class="footer-upper pb-4">
         <div class="container">
             <div class="row">
@@ -451,50 +470,50 @@
                     <div class="footer-about">
                         <img src="/travelin/images/logo-white.png" alt="">
                         <p class="mt-3 mb-3 white">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio suspendisse leo neque iaculis molestie sagittis maecenas aenean eget molestie sagittis.
+                            Hayalinizdeki yolculuğa bizimle çıkın! Dünyanın dört bir yanına unutulmaz deneyimler sunuyoruz.
                         </p>
                         <ul>
-                            <li class="white"><strong>PO Box:</strong> +47-252-254-2542</li>
-                            <li class="white"><strong>Location:</strong> Collins Street, sydney, Australia</li>
-                            <li class="white"><strong>Email:</strong> info@Travelin.com</li>
-                            <li class="white"><strong>Website:</strong> www.Travelin.com</li>
+                            <li class="white"><strong>Telefon:</strong> +90 212 555 25 42</li>
+                            <li class="white"><strong>Adres:</strong> Bağdat Caddesi No:120, Kadıköy / İstanbul</li>
+                            <li class="white"><strong>E-posta:</strong> info@travelin.com</li>
+                            <li class="white"><strong>Web:</strong> www.travelin.com</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
                     <div class="footer-links">
-                        <h3 class="white">Quick link</h3>
+                        <h3 class="white">Hızlı Linkler</h3>
                         <ul>
-                            <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="about-us.html">Delivery Information</a></li>
-                            <li><a href="about-us.html">Privacy Policy</a></li>
-                            <li><a href="about-us.html">Terms &amp; Conditions</a></li>
-                            <li><a href="about-us.html">Customer Service</a></li>
-                            <li><a href="#about-us.html">Return Policy</a></li>
+                            <li><a href="#">Hakkımızda</a></li>
+                            <li><a href="#">Tur ve Rezervasyon Bilgileri</a></li>
+                            <li><a href="#">Gizlilik Politikası</a></li>
+                            <li><a href="#">Kullanım Şartları</a></li>
+                            <li><a href="#">Müşteri Hizmetleri</a></li>
+                            <li><a href="#">İptal ve İade Politikası</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 col-sm-12 mb-4">
                     <div class="footer-links">
-                        <h3 class="white">Categories</h3>
+                        <h3 class="white">Kategoriler</h3>
                         <ul>
-                            <li><a href="about-us.html">Travel</a></li>
-                            <li><a href="about-us.html">Technology</a></li>
-                            <li><a href="about-us.html">Lifestyle</a></li>
-                            <li><a href="about-us.html">Destinations</a></li>
-                            <li><a href="about-us.html">Entertainment</a></li>
-                            <li><a href="about-us.html">Business</a></li>
+                            <li><a href="#">Yurt İçi Turlar</a></li>
+                            <li><a href="#">Yurt Dışı Turlar</a></li>
+                            <li><a href="#">Kültür Turları</a></li>
+                            <li><a href="#">Doğa &amp; Macera Turları</a></li>
+                            <li><a href="#">Günübirlik Turlar</a></li>
+                            <li><a href="#">Özel Organizasyonlar</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                     <div class="footer-links">
-                        <h3 class="white">Newsletter</h3>
-                        <div class="newsletter-form ">
-                            <p class="mb-3">Jin our community of over 200,000 global readers who receives emails filled with news, promotions, and other good stuff.</p>
+                        <h3 class="white">Bültenimize Abone Olun</h3>
+                        <div class="newsletter-form">
+                            <p class="mb-3">Kampanyalar, yeni tur rotaları ve özel indirimlerden ilk siz haberdar olun.</p>
                             <form action="#" method="get" accept-charset="utf-8" class="border-0 d-flex align-items-center">
-                                <input type="text" placeholder="Email Address">
-                                <button class="nir-btn ms-2">Subscribe</button>
+                                <input type="text" placeholder="E-posta Adresiniz">
+                                <button class="nir-btn ms-2">Abone Ol</button>
                             </form>
                         </div>
                     </div>
@@ -508,7 +527,7 @@
             <div class="row footer-pay align-items-center justify-content-between text-lg-start text-center">
                 <div class="col-lg-8 footer-payment-nav mb-4">
                     <ul class="">
-                        <li class="me-2">We Support:</li>
+                        <li class="me-2">Destekliyoruz:</li>
                         <li class="me-2"><i class="fab fa-cc-mastercard fs-4"></i></li>
                         <li class="me-2"><i class="fab fa-cc-paypal fs-4"></i></li>
                         <li class="me-2"><i class="fab fa-cc-stripe fs-4"></i></li>
@@ -519,21 +538,23 @@
                 <div class="col-lg-4 footer-payment-nav mb-4">
                     <ul class="d-flex align-items-center">
                         <li class="me-2 w-75">
-                            <select class="niceSelect rounded">
-                                <option>English</option>
-                                <option>Chinese</option>
-                                <option>Russian</option>
-                                <option>Japanese</option>
-                                <option>Korean</option>
-                            </select>
+                            <form id="langForm" method="post" action="/Language/Change">
+                                <input type="hidden" name="__RequestVerificationToken" id="langCsrf" value="" />
+                                <input type="hidden" name="returnUrl" id="langReturnUrl" value="" />
+                                <select name="culture" id="langSelect" class="niceSelect rounded" onchange="submitLang()">
+                                    <option value="tr">🇹🇷 Türkçe</option>
+                                    <option value="en">🇬🇧 English</option>
+                                    <option value="fr">🇫🇷 Français</option>
+                                    <option value="de">🇩🇪 Deutsch</option>
+                                </select>
+                            </form>
                         </li>
                         <li class="w-25">
                             <select class="niceSelect rounded">
+                                <option>₺ TRY</option>
                                 <option>$ USD</option>
-                                <option>$ AUD</option>
-                                <option>$ YEN</option>
-                                <option>$ IN</option>
-                                <option>$ NP</option>
+                                <option>€ EUR</option>
+                                <option>£ GBP</option>
                             </select>
                         </li>
                     </ul>
@@ -546,7 +567,7 @@
         <div class="container">
             <div class="copyright-inner rounded p-3 d-md-flex align-items-center justify-content-between">
                 <div class="copyright-text">
-                    <p class="m-0 white">2022 Travelin. All rights reserved.</p>
+                    <p class="m-0 white">@DateTime.Now.Year Travelin. Tüm Hakları Saklıdır.</p>
                 </div>
                 <div class="social-links">
                     <ul>
@@ -561,6 +582,30 @@
     </div>
     <div id="particles-js"></div>
 </footer>
+
+<script>
+    (function () {
+        var match = document.cookie.match(/\.AspNetCore\.Culture=c%3D([a-z]+)/);
+        var current = match ? match[1] : 'tr';
+        var sel = document.getElementById('langSelect');
+        if (sel) {
+            for (var i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].value === current) {
+                    sel.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+    })();
+
+    function submitLang() {
+        var token = document.querySelector('input[name="__RequestVerificationToken"]');
+        if (token) document.getElementById('langCsrf').value = token.value;
+        document.getElementById('langReturnUrl').value = window.location.pathname;
+        document.getElementById('langForm').submit();
+    }
+</script>
+
 
 
 
@@ -608,17 +653,101 @@
                 }
 
 </style>
-  <script src="/travelin/js/jquery-3.5.1.min.js"></script>  
-  <script src="/travelin/js/bootstrap.min.js"></script>  
-  <script src="/travelin/js/fontawesome.min.js"></script>  
-  <script src="/travelin/js/particles.js"></script>  
-  <script src="/travelin/js/particlerun.js"></script>  
-@*    <script src="/travelin/js/plugin.js"></script>  *@  
-  <script src="/travelin/js/main.js"></script>
 
-  <script src="/travelin/js/custom-swiper.js"></script> 
- <script src="/travelin/js/custom-accordian.js"></script> 
-  <script src="/travelin/js/custom-nav.js"></script>  
+<style>
+    .route-day {
+        background: #f8fafc;
+        border-left: 4px solid #0aab97;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+        .route-day h5 {
+            color: #0aab97;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .route-day ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+            .route-day ul li {
+                margin-bottom: 6px;
+                font-size: 14px;
+            }
+</style>
+<script src="/travelin/js/jquery-3.5.1.min.js"></script>
+
+<!-- Eksik kütüphaneler - main.js'den ÖNCE -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script>
+    // modalVideo polyfill - eksik olduğunda hata vermesin
+    if (typeof jQuery !== 'undefined' && typeof $.fn.modalVideo === 'undefined') {
+        $.fn.modalVideo = function () { return this; };
+    }
+    // slicknav polyfill
+    if (typeof jQuery !== 'undefined' && typeof $.fn.slicknav === 'undefined') {
+        $.fn.slicknav = function () { return this; };
+    }
+</script>
+
+<script src="/travelin/js/bootstrap.min.js"></script>
+<script src="/travelin/js/fontawesome.min.js"></script>
+<script src="/travelin/js/particles.js"></script>
+<script src="/travelin/js/particlerun.js"></script>
+@* <script src="/travelin/js/plugin.js"></script> *@
+<script src="/travelin/js/main.js"></script>
+@* <script src="/travelin/js/custom-swiper.js"></script> *@
+<script src="/travelin/js/custom-accordian.js"></script>
+<script src="/travelin/js/custom-nav.js"></script>
+
+<script>
+    async function generateRoute() {
+        const btn = document.getElementById('routeBtn');
+        const loading = document.getElementById('routeLoading');
+        const result = document.getElementById('routeResult');
+
+        btn.style.display = 'none';
+        loading.style.display = 'block';
+        result.style.display = 'none';
+
+        try {
+            const response = await fetch('/Tour/GenerateRoute', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    tourName: '@Html.Raw(Model.Tour.Title)',
+                    city: '@Html.Raw(Model.Tour.City)',
+                    country: '@Html.Raw(Model.Tour.Country)'
+                })
+            });
+
+            const data = await response.json();
+            console.log('Gelen data:', JSON.stringify(data));
+
+            loading.style.display = 'none';
+            result.style.display = 'block';
+
+            if (data.error) {
+                result.innerHTML = '<div class="alert alert-danger">' + data.error + '</div>';
+            } else {
+                result.innerHTML = data.route;
+            }
+
+        } catch (e) {
+            loading.style.display = 'none';
+            btn.style.display = 'block';
+            alert('Bir hata oluştu, tekrar deneyin.');
+        }
+    }
+</script>
+
 
 
 

@@ -31,7 +31,7 @@ namespace Project3Travelin.Controllers
              booking.Email,
              booking.FirstName + " " + booking.LastName,
              booking.TourTitle,
-             booking.BookingDate, 
+            booking.StartDate,
             booking.TotalPrice
                 );
 

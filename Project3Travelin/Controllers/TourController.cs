@@ -3,6 +3,9 @@ using Project3Travelin.Dtos.TourDtos;
 using Project3Travelin.Services.CommentServices;
 using Project3Travelin.Services.TourServices;
 using Project3Travelin.ViewModels;
+using System.Text.Json;
+using System.Text;
+
 
 namespace Project3Travelin.Controllers
 {
@@ -10,11 +13,12 @@ namespace Project3Travelin.Controllers
     {
         private readonly ITourService _tourService;
         private readonly ICommentService _commentService;
+      
 
         public TourController(ITourService tourService, ICommentService commentService)
         {
             _tourService = tourService;
-            _commentService = commentService;
+            _commentService = commentService;         
         }
 
         public IActionResult CreateTour()
@@ -45,6 +49,19 @@ namespace Project3Travelin.Controllers
             };
 
             return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> GenerateRoute([FromBody] RouteRequestDto dto)
+        {
+            try
+            {
+                var route = await _tourService.GenerateRouteAsync(dto.TourName, dto.City, dto.Country);
+                return Json(new { route });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
         }
     }
 }

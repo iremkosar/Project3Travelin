@@ -1,0 +1,49 @@
+﻿@using Project3Travelin.Dtos.TourDtos
+@model List<ResultTourDto>
+
+<!-- Top Destinations starts -->
+<section class="trending" style="background-image: url(/travelin/images/shape-1.png); background-position: center">
+    <div class="container-xxl">
+
+        <div class="section-title mb-6 w-75 mx-auto text-center">
+            <h4 class="mb-1 theme1">Popüler Destinasyonlar</h4>
+            <h2 class="mb-1">En Çok Tercih Edilen <span class="theme">Seyahat Rotaları</span></h2>
+            <p>
+                Dünyanın en popüler şehirlerini keşfedin ve unutulmaz bir seyahat deneyimi yaşayın.
+                Size özel hazırladığımız tur rotalarıyla yeni maceralara hazır olun.
+            </p>
+        </div>
+
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="top-dscp">
+                    <div class="cards-container">
+
+                        @foreach (var tour in Model)
+                        {
+                            <div class="card" style="background-image: url('@tour.ImageUrl')">
+                                <a asp-controller="Tour"
+                                   asp-action="TourDetail"
+                                   asp-route-id="@tour.TourId">
+
+                                    <div class="card-content">
+
+                                        <h4>@tour.Country</h4>
+                                        <h2>@tour.City</h2>
+
+                                    </div>
+
+                                    <div class="soft-overlay"></div>
+
+                                </a>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Top Destinations ends -->
