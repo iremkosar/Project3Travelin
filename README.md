@@ -55,6 +55,7 @@ Yapılabilecek aktiviteler
 Yemek önerileri
 
 gibi bilgiler kullanıcıya sunulmaktadır.
+
 🚀 Projede Gerçekleştirilen İşlemler
 
 Bu proje kapsamında aşağıdaki temel sistem akışları başarıyla uygulanmıştır:
