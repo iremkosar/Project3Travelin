@@ -4,13 +4,14 @@
 
 Tripify, tur ve seyahat sektörüne yönelik geliştirilmiş, kullanıcıların tur seçeneklerini inceleyebildiği, rezervasyon yapabildiği ve seyahat deneyimlerini paylaşabildiği yapay zeka destekli bir web uygulamasıdır.
 
-Bu proje; modern web uygulamalarında kullanılan katmanlı mimari, REST API yapısı, yapay zeka entegrasyonu ve rezervasyon yönetimi gibi süreçleri gerçek bir senaryo üzerinden uygulamalı olarak deneyimlemek amacıyla geliştirilmiştir.
+Bu proje; modern web uygulamalarında kullanılan mimari , yapay zeka entegrasyonu ve rezervasyon yönetimi gibi süreçleri gerçek bir senaryo üzerinden uygulamalı olarak deneyimlemek amacıyla geliştirilmiştir.
 
 Tripify sayesinde kullanıcılar farklı destinasyonlara ait tur seçeneklerini inceleyebilir, tur detaylarını görüntüleyebilir, rezervasyon oluşturabilir ve daha önce bu turları deneyimleyen kullanıcıların yorumlarını okuyabilir.
 
 Proje içerisinde kullanılan yapay zeka entegrasyonları, tur detay sayfalarında kullanıcı deneyimini zenginleştiren içerikler üretmektedir. Yapay zeka; tur hakkında günlük gezi planları oluşturmak, kullanıcı yorumlarını analiz ederek özet çıkarmak ve rezervasyon işlemleri için e-posta içerikleri hazırlamak gibi işlevleri yerine getirmektedir.
 
 Bu sayede sistem yalnızca bir rezervasyon platformu değil, aynı zamanda kullanıcıların seyahat planlarını kolaylaştıran akıllı bir seyahat asistanı görevi görmektedir.
+
 🗄️ Veritabanı
 MongoDB
 
