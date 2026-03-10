@@ -1,4 +1,5 @@
 ✈️ Tripify
+
 📌 Projenin Amacı
 
 Tripify, tur ve seyahat sektörüne yönelik geliştirilmiş, kullanıcıların tur seçeneklerini inceleyebildiği, rezervasyon yapabildiği ve seyahat deneyimlerini paylaşabildiği yapay zeka destekli bir web uygulamasıdır.
